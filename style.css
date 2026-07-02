@@ -1,0 +1,225 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+body {
+    background-color: #0f0f13;
+    color: #00ffcc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Changed from height to min-height for better mobile scrolling */
+    padding: 20px; /* Ensures the box never touches the edge of a phone screen */
+}
+
+.container {
+    background: #1a1a24;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+    width: 100%; /* Allows it to shrink on mobile */
+    max-width: 480px; /* Prevents it from getting too wide on desktop */
+    border: 1px solid #00ffcc;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- THE TOP ROW --- */
+.display-container {
+    display: flex;
+    gap: 12px; 
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Allows buttons to drop to a new line on tiny screens */
+}
+
+#password-display {
+    flex: 1 1 100%; /* Tells the input box to stretch naturally */
+    padding: 12px;
+    background: #0f0f13;
+    border: 1px solid #00ffcc;
+    color: #fff;
+    font-size: 1.1rem;
+    outline: none;
+    border-radius: 4px;
+}
+
+/* --- COPY & CLEAR BUTTONS --- */
+#copy-btn, #clear-btn {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+#copy-btn {
+    background: #00ffcc;
+    color: #0f0f13;
+}
+
+#copy-btn:hover {
+    box-shadow: 0 0 15px #00ffcc;
+    background: #e6ffff;
+}
+
+#clear-btn {
+    background: transparent;
+    color: #ff0055;
+    border: 1px solid #ff0055;
+}
+
+#clear-btn:hover {
+    background: #ff0055;
+    color: #fff;
+    box-shadow: 0 0 15px #ff0055;
+}
+
+/* --- STRENGTH METER --- */
+.strength-meter {
+    margin-bottom: 25px;
+}
+
+.strength-bar {
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+#crack-time {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* --- CONTROLS & CHECKBOXES --- */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+#length {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+/* --- MAIN GENERATE BUTTON --- */
+#generate-btn {
+    width: 100%;
+    padding: 15px;
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+#generate-btn:hover {
+    background: #00ffcc;
+    color: #0f0f13;
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+/* --- MOBILE RESPONSIVENESS (THE MAGIC FIX) --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Gives a bit more breathing room on small screens */
+    }
+    
+    h2 {
+        font-size: 1.3rem; /* Shrinks the title slightly so it fits */
+    }
+
+    #password-display {
+        flex: 1 1 100%; /* Forces the input to take the whole top row */
+        margin-bottom: 5px;
+    }
+
+    #copy-btn, #clear-btn {
+        flex: 1; /* Makes the Copy and Clear buttons share the bottom row evenly! */
+        text-align: center;
+    }
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    font-family: sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* THE GRID OVERLAY */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* THE MULTI-COLOR PULSE */
+body::before {
+    content: "";
+    position: absolute;
+    width: 60vw; height: 60vw;
+    /* Added more colors to the gradient start */
+    background: radial-gradient(circle, #ff0055, #00ffcc, #3b82f6, transparent 70%);
+    filter: blur(150px);
+    opacity: 0.4;
+    animation: pulse 12s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1) translate(-10%, -10%); 
+        filter: blur(150px) hue-rotate(0deg); 
+    }
+    100% { 
+        transform: scale(1.3) translate(10%, 10%); 
+        filter: blur(150px) hue-rotate(360deg); 
+    }
+}
